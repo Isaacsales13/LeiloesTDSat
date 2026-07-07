@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -13,8 +16,23 @@ public class cadastroVIEW extends javax.swing.JFrame {
      * Creates new form cadastroVIEW
      */
     public cadastroVIEW() {
-        initComponents();
+        initComponents();   
     }
+    public class Main {
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new cadastroVIEW().setVisible(true);
+            }
+        });
+    }
+}
+    private void limparCampos() {
+    cadastroNome.setText("");
+    cadastroValor.setText("");
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -147,10 +165,16 @@ public class cadastroVIEW extends javax.swing.JFrame {
         produto.setNome(nome);
         produto.setValor(Integer.parseInt(valor));
         produto.setStatus(status);
-        
+
         ProdutosDAO produtodao = new ProdutosDAO();
-        produtodao.cadastrarProduto(produto);
-        
+        boolean sucesso = produtodao.cadastrarProduto(produto);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Falha ao cadastrar o item.");
+    }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
