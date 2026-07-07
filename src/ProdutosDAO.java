@@ -47,7 +47,7 @@ public class ProdutosDAO {
             String sql = "SELECT * FROM produtos";
             prep = conn.prepareStatement(sql);
             resultset = prep.executeQuery();
-            
+
             while(resultset.next()){
                 ProdutosDTO produto = new ProdutosDTO();
                 produto.setId(resultset.getInt("id")); 
@@ -56,7 +56,7 @@ public class ProdutosDAO {
                 produto.setStatus(resultset.getString("status"));
                 listagem.add(produto);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + e.getMessage());
